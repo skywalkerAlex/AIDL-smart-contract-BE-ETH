@@ -1,4 +1,4 @@
-# aidl-smart-contract-rust
+# aidl-smart-contract-be-Eth
 Thesis for Master in Artificial Intelligence and Deep Learning - Design and Implementation of a smart contract in a Blockchain Network to evaluate the characteristics of datasets.
 
 ## Basic Installation
@@ -25,7 +25,8 @@ npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/run.js 
+npx hardhat run scripts/deploy.js --network goerli
 ```
 
 ## Solana Installation (To be update)

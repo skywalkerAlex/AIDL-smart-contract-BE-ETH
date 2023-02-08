@@ -29,7 +29,7 @@ const main=async () => {
         accuracy_score: "0.9",
         data_type: "dataType1",
         file_type: "fileType1",
-        models_used: ["model1", "model2", "model3"],
+        models_used: ['model1', 'model2', 'model3'],
         libraries_used: ["library1", "library2", "library3"],
     }
 

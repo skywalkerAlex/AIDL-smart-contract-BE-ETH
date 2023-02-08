@@ -5,12 +5,8 @@ pragma solidity ^0.8.17;
 import "hardhat/console.sol";
 
 contract DataSetPortal {
-    uint256 totalDatasets;
-    uint256 totalSize;
-    /*
-     * We will be using this below to help generate a random number
-     */
-    uint256 private seed;
+    int256 totalDatasets;
+    int256 totalSize;
 
     /*
      * It stores the arguments passed in transaction logs.
@@ -31,7 +27,7 @@ contract DataSetPortal {
     struct DatasetObj {
         address user_address; // The address of the user.
         string name; // The name the user.
-        uint256 size; // The size of the dataset in MB.
+        int256 size; // The size of the dataset in MB.
         string accuracy_score; // The accuracy score of the model.
         string data_type; // The type of the dataset.
         string file_type; // The type of the files on the dataset.
@@ -44,8 +40,8 @@ contract DataSetPortal {
      * A custom datatype where we can customize what we want to hold inside it.
      */
     struct Total {
-        uint256 numberOfDataset; // The number of DataSets.
-        uint256 size; // The size of the dataset in MB.
+        int256 numberOfDataset; // The number of DataSets.
+        int256 size; // The size of the dataset in MB.
     }
 
     /*
@@ -63,15 +59,11 @@ contract DataSetPortal {
     constructor() payable {
         console.log("I AM SMART CONTRACT. POG. And payable.");
         console.log("Yo yo, I am a contract and I am smart\n");
-        /*
-         * Set the initial seed
-         */
-        seed = (block.timestamp + block.difficulty) % 100;
     }
 
     function upload_dataset_details(
         string memory name,
-        uint256 size,
+        int256 size,
         string memory accuracy_score,
         string memory data_type,
         string memory file_type,
@@ -107,6 +99,10 @@ contract DataSetPortal {
             _datasetInput.accuracy_score
         );
 
+        console.log(
+            "models_used.length : %s",
+            _datasetInput.models_used.length
+        );
         _datasetInput.user_address = msg.sender;
         _datasetInput.timestamp = block.timestamp;
         /*
@@ -132,26 +128,6 @@ contract DataSetPortal {
     }
 
     function getTotalNumbers() public view returns (Total memory) {
-        // Optional: Add this line if you want to see the contract print the value!
-        // We'll also print it over in run.js as well.
-        console.log("We have %d total datasets!", totalDatasets);
-
         return Total(totalDatasets, totalSize);
     }
-
-    // function uintToString(uint256 v) private returns (string str) {
-    //     uint256 maxlength = 100;
-    //     bytes memory reversed = new bytes(maxlength);
-    //     uint256 i = 0;
-    //     while (v != 0) {
-    //         uint256 remainder = v % 10;
-    //         v = v / 10;
-    //         reversed[i++] = bytes1(48 + remainder);
-    //     }
-    //     bytes memory s = new bytes(i + 1);
-    //     for (uint256 j = 0; j <= i; j++) {
-    //         s[j] = reversed[i - j];
-    //     }
-    //     str = string(s);
-    // }
 }
